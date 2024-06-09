@@ -1,0 +1,1 @@
+from footballtracker.tracking.bytetrack_tracker import ByteTracker
