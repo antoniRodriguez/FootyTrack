@@ -33,7 +33,6 @@ class FootballTracker:
             detections = self.tracker.track(frame, detections)
             self.tracker.update(detections)
 
-            # frame = self.object_detector.draw_detections(frame, detections)
             # frame = self.visualizer.draw_tracked_detections(frame, detections, self.object_classes_dict)
             frame = self.visualizer.draw_detections(frame, detections, self.object_classes_dict)
             frames.append(frame)
