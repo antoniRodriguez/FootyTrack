@@ -1,6 +1,6 @@
 import cv2
 import supervision as sv
-
+import time
 from footballtracker import ByteTracker
 from footballtracker import ObjectDetector
 from footballtracker.io import ConfigManager
@@ -25,7 +25,13 @@ class FootballTracker:
         cap = cv2.VideoCapture(self.input_video_path)
         frames = []
         ret, frame = cap.read()
+        start_time = time.time()
+
+        frame_count = 0
+        last_fps_time = start_time
+        fps = 0  # Initial FPS
         while ret:
+            frame_count += 1
             # DETECT
             detections = self.object_detector.run_inference(frame)
 
@@ -35,6 +41,18 @@ class FootballTracker:
 
             # frame = self.visualizer.draw_tracked_detections(frame, detections, self.object_classes_dict)
             frame = self.visualizer.draw_detections(frame, detections, self.object_classes_dict)
+
+            # FPS management
+            current_time = time.time()
+            elapsed_time = current_time - start_time
+            if elapsed_time > 2:
+                if current_time - last_fps_time >= 2:
+                    fps = frame_count / (current_time - last_fps_time)
+                    last_fps_time = current_time
+                    frame_count = 0
+
+            frame = self.visualizer.add_text(frame, f'FPS: {round(fps, 2)}')
+
             frames.append(frame)
 
             if self.show_live:
@@ -45,6 +63,7 @@ class FootballTracker:
 
         cap.release()
         cv2.destroyAllWindows()
+
 
 
 if __name__ == '__main__':
