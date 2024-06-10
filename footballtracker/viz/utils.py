@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 import supervision as sv
 
 
@@ -50,3 +51,26 @@ class Visualizer:
         )
 
         return annotated_frame
+
+    def add_text(self, frame: np.ndarray, text: str):
+        # Set the font, scale, and color
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = self.text_scale
+        font_thickness = 2
+        text_color = (0, 255, 0)  # Green color in BGR
+        background_color = (0, 0, 0)  # Black color in BGR
+        (text_width, text_height), baseline = cv2.getTextSize(text, font, font_scale, font_thickness)
+
+        text_x = 10  # 10 pixels from the left edge
+        text_y = frame.shape[0] - 10  # 10 pixels from the bottom edge
+
+        # Define the rectangle background for the text
+        rect_x1 = text_x - 5
+        rect_y1 = text_y + baseline
+        rect_x2 = text_x + text_width + 5
+        rect_y2 = text_y - text_height - 5
+
+        cv2.rectangle(frame, (rect_x1, rect_y1), (rect_x2, rect_y2), background_color, thickness=cv2.FILLED)
+        cv2.putText(frame, text, (text_x, text_y), font, font_scale, text_color, font_thickness)
+
+        return frame
