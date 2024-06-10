@@ -1,4 +1,5 @@
 import json
+import logging
 import subprocess
 
 import yaml
@@ -7,6 +8,8 @@ import yaml
 class ConfigManager:
     def __init__(self, config_path: str):
         self.config = self.load_config(config_path)
+        self.logger = logging.getLogger(__name__)
+        logging.basicConfig(level=logging.INFO)
 
     @staticmethod
     def load_config(config_path: str) -> dict:
@@ -21,6 +24,13 @@ class ConfigManager:
             if value is default:
                 break
         return value
+
+    def set(self, key: str, value: str):
+        if key in self.config:
+            self.logger.info(f'Overwriting config: {key} was {self.config[key]}, new value is {value}')
+        else:
+            self.logger.info(f'Setting new config: {key} = {value}')
+        self.config[key] = value
 
 
 def get_video_fps(video_path: str) -> float:

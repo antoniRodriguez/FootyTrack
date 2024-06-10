@@ -1,11 +1,10 @@
 object_detector:
-  weights_path: '../footballtracker/detection/weights/yolov8n.pt'
+  weights_path: './footballtracker/detection/weights/yolov8n.pt'
   classes:
     0: 'ball'
-    1: 'player'  # originally goalkeeper, but keeping as player due to low acc (class imbalance)
+    1: 'goalkeeper'
     2: 'player'
     3: 'referee'
 
 input_video_path: '../data/0b1495d3_0.mp4'
-TPU_optimization: true
 show_live: true

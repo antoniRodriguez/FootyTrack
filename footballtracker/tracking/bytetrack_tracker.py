@@ -8,7 +8,6 @@ class ByteTracker(BaseTracker):
     def __init__(self, fps: int, confidence_threshold: float = 0.1, iou_threshold: float = 0.7):
         self.confidence_threshold = confidence_threshold
         self.iou_threshold = iou_threshold
-        # self.tracker = ByteTrack(fps, self.confidence_threshold)  # expects int but works with float?
         self.tracker = ByteTrack(frame_rate=fps)
 
     def update(self, detections: Detections) -> Detections:
