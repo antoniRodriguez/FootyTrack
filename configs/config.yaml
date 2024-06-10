@@ -7,4 +7,5 @@ object_detector:
     3: 'referee'
 
 input_video_path: '../data/0b1495d3_0.mp4'
+TPU_optimization: true
 show_live: true

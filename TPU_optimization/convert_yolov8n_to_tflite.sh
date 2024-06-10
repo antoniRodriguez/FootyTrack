@@ -1,0 +1,1 @@
+yolo export model='../footballtracker/detection/weights/yolov8n.pt' format=edgetpu imgsz=640
