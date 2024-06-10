@@ -37,4 +37,4 @@ The current detection model is yolov8s.pt. The TPU model is a tflite version of 
 `Note that 
 > ⚠️🚧 **Warning**: The TPU model is under development, and its performance may not be on par with the float32 model (Post-training full integer quantisation has been used for the current TPU model, a quantisation-aware training version is on the works)
 
-![confusion_matrix.png](..%2F..%2FDownloads%2Fcontent%203%2Fruns%2Fdetect%2Ftrain7%2Fconfusion_matrix.png)
+![confusion_matrix.png](readme_resources%2Fconfusion_matrix.png)
